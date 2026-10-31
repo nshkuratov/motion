@@ -1,0 +1,293 @@
+/* One scroll range, separate background, object, foreground and type tracks. */
+.worlds-scroll {
+  height: 580svh;
+  position: relative;
+  view-timeline-name: --worlds;
+  view-timeline-axis: block;
+  view-timeline-inset: 0;
+  background: #7c6889;
+}
+.worlds-stage {
+  height: 100svh;
+  min-height: 0;
+  position: sticky;
+  top: 0;
+  overflow: clip;
+  isolation: isolate;
+}
+.world-anchor { position: absolute; top: calc((100% - 100svh) * .44); width: 1px; height: 1px; pointer-events: none; }
+.world-anchor-last { top: calc((100% - 100svh) * .94); }
+.world-backdrops, .world, .world-scrim { position: absolute; inset: 0; }
+.world-backdrops { z-index: -3; }
+.world-backdrop { position: absolute; width: 100%; height: 100%; inset: 0; }
+/* A separate time-based camera preserves the outer scroll transform and fade. */
+.world-camera {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: var(--camera-path) var(--camera-duration) ease-in-out infinite alternate both;
+  animation-play-state: paused;
+}
+.world-camera > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.world-atmosphere {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; opacity: 0; transition: opacity 500ms ease;
+}
+.world-atmosphere[data-visible="true"] { opacity: 1; }
+.worlds-stage[data-camera-enabled="true"][data-camera-visible="true"] .world-camera { animation-play-state: running; }
+.cloud-backdrop { --camera-path: cloud-camera; --camera-duration: 18s; }
+.desert-backdrop { --camera-path: desert-camera; --camera-duration: 22s; }
+.ocean-backdrop { --camera-path: ocean-camera; --camera-duration: 20s; }
+/* At least 6% overscan covers the drift, including at portrait aspect ratios. */
+@keyframes cloud-camera {
+  from { transform: translate3d(-1%, .6%, 0) scale(1.16); }
+  to { transform: translate3d(1%, -.6%, 0) scale(1.06); }
+}
+@keyframes desert-camera {
+  from { transform: translate3d(1.4%, -.4%, 0) scale(1.07); }
+  to { transform: translate3d(-1.4%, .6%, 0) scale(1.15); }
+}
+@keyframes ocean-camera {
+  from { transform: translate3d(-1.2%, .7%, 0) scale(1.08); }
+  to { transform: translate3d(1.2%, -.7%, 0) scale(1.14); }
+}
+.world { pointer-events: none; }
+.world a, .world button { pointer-events: auto; }
+.world[inert] { pointer-events: none; }
+.world[inert] a { pointer-events: none; }
+.world-object { position: absolute; transform-origin: 50% 50%; pointer-events: none; }
+.world-object img, .cloud-foreground img, .ocean-foreground img { width: 100%; height: 100%; object-fit: contain; }
+/* The image follows the pointer; its parent keeps the scroll choreography. */
+.world-object img {
+  display: block;
+  transform: translate3d(calc(var(--pointer-x, 0) * var(--pointer-travel-x)), calc(var(--pointer-y, 0) * var(--pointer-travel-y)), 0) rotate(calc(var(--pointer-x, 0) * var(--pointer-turn)));
+  transition: transform 700ms cubic-bezier(.16, 1, .3, 1);
+}
+.orbit-object { --pointer-travel-x: 16px; --pointer-travel-y: 11px; --pointer-turn: .8deg; }
+.moon-object { --pointer-travel-x: 10px; --pointer-travel-y: 8px; --pointer-turn: .25deg; }
+.glass-object { --pointer-travel-x: 18px; --pointer-travel-y: 12px; --pointer-turn: 1deg; }
+.orbit-object { width: min(60vw, 88svh); height: min(60vw, 88svh); right: 3vw; top: 5svh; }
+.moon-object { width: min(58vw, 84svh); height: min(58vw, 84svh); right: 4vw; top: 7svh; }
+.glass-object { width: min(60vw, 88svh); height: min(60vw, 88svh); right: 3vw; top: 4svh; }
+.ocean-foreground { position: absolute; width: 120vw; height: 55svh; left: -10vw; bottom: -5svh; pointer-events: none; }
+.ocean-foreground img { object-fit: fill; }
+.cloud-foreground { position: absolute; width: 100vw; height: 65svh; right: -18vw; bottom: -18svh; pointer-events: none; }
+.world-scrim { background: linear-gradient(90deg, #211b3973, transparent 70%), linear-gradient(0deg, #211b39a6, transparent 42%); pointer-events: none; }
+.desert-scrim { background: linear-gradient(90deg, #381a1559, transparent 70%), linear-gradient(0deg, #28120ca6, transparent 40%); }
+.ocean-scrim { background: linear-gradient(90deg, #241b448c, transparent 75%), linear-gradient(0deg, #221d39bf, transparent 45%); }
+.world-copy { position: absolute; top: 25%; left: var(--gutter); }
+.world h1, .world h2 { font-size: clamp(74px, 7.6vw, 120px); line-height: .99; letter-spacing: -.04em; font-weight: 800; }
+.story-line { display: block; transform-origin: 0 50%; }
+.world h1 em, .world h2 em { font-style: normal; color: var(--peach); }
+.world-desert h2 em { color: #ffdcac; }
+.world-link { margin-top: 34px; }
+.world-description { position: absolute; right: var(--gutter); bottom: 145px; width: 300px; font-size: 20px; line-height: 1.5; letter-spacing: -.02em; }
+.world-description > span { display: block; font-size: 11px; margin-top: 13px; letter-spacing: 0; }
+.world-caption { position: absolute; left: var(--gutter); bottom: 40px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
+.world-caption span + span { font-size: 10px; opacity: .85; }
+.world-navigation { position: absolute; z-index: 5; right: var(--gutter); bottom: 34px; display: flex; gap: 28px; align-items: center; }
+.world-pagination { display: flex; gap: 24px; }
+.world-pagination button { padding: 14px 0; display: flex; align-items: center; gap: 9px; color: #fffaf5a6; font-size: 11px; font-variant-numeric: tabular-nums; transition: color .25s; }
+.world-pagination button.active { color: var(--paper); }
+.pagination-name { max-width: 0; opacity: 0; white-space: nowrap; overflow: hidden; transition: max-width .45s var(--ease), opacity .3s; }
+.active .pagination-name { max-width: 85px; opacity: 1; }
+.world-progress { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: #fffaf529; }
+.world-progress span { display: block; height: 100%; background: var(--paper); transform-origin: left; --motion: story-progress; }
+
+.motion-layer {
+  animation-name: var(--motion);
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  animation-delay: calc(var(--scroll-p, 0) * -1s);
+}
+.cloud-backdrop { --motion: cloud-sky-out; }
+.desert-backdrop { --motion: desert-sky-through; }
+.ocean-backdrop { --motion: ocean-sky-in; }
+.orbit-object { --motion: orbit-out; }
+.moon-object { --motion: moon-through; }
+.glass-object { --motion: glass-in; }
+.ocean-foreground { --motion: waves-in; }
+.cloud-foreground { --motion: clouds-out; }
+.cloud-scrim { --motion: cloud-sky-out; }
+.desert-scrim { --motion: desert-sky-through; }
+.ocean-scrim { --motion: ocean-sky-in; }
+.world-cloud .story-line { --motion: type-out; }
+.world-desert .story-line { --motion: type-through; }
+.world-ocean .story-line { --motion: type-in; }
+.world-cloud .world-link, .world-cloud .world-description { --motion: cloud-detail-out; }
+.world-desert .world-link, .world-desert .world-description { --motion: detail-through; }
+.world-ocean .world-link, .world-ocean .world-description { --motion: ocean-detail-in; }
+.world-cloud .world-caption { --motion: caption-out; }
+.world-desert .world-caption { --motion: caption-through; }
+.world-ocean .world-caption { --motion: caption-in; }
+
+@supports (animation-timeline: view()) and (animation-range: contain 0% contain 100%) {
+  .motion-layer {
+    animation-duration: auto;
+    animation-delay: 0s;
+    animation-play-state: running;
+    animation-timeline: --worlds;
+    animation-range: contain 0% contain 100%;
+  }
+}
+@supports (z-index: attr(data-line type(<number>), 0)) {
+  .story-line { --line: attr(data-line type(<number>), 0); }
+}
+
+/* The first transition occupies 0–50%; the second repeats its rhythm at 50–100%. */
+@keyframes cloud-sky-out {
+  0%, 6% { opacity: 1; transform: scale(1.02) translateY(0); filter: blur(0); }
+  19% { opacity: 1; filter: blur(2px); }
+  34%, 100% { opacity: 0; transform: scale(1.15) translateY(-7%); filter: blur(0); }
+}
+@keyframes desert-sky-through {
+  0%, 10.5% { opacity: 0; transform: scale(1.16) translateY(8%); }
+  35%, 56% { opacity: 1; transform: scale(1.02) translateY(0); filter: blur(0); }
+  69% { opacity: 1; filter: blur(2px); }
+  84%, 100% { opacity: 0; transform: scale(1.15) translateY(-7%); filter: blur(0); }
+}
+@keyframes ocean-sky-in {
+  0%, 60.5% { opacity: 0; transform: scale(1.16) translateY(8%); }
+  85%, 100% { opacity: 1; transform: scale(1.02) translateY(0); }
+}
+@keyframes orbit-out {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
+  7.5% { transform: translate3d(-1vw, -3svh, 0) rotate(-3deg) scale(1.02); opacity: 1; }
+  24% { transform: translate3d(9vw, -47svh, 0) rotate(-24deg) scale(.9); opacity: 1; }
+  34%, 100% { transform: translate3d(16vw, -110svh, 0) rotate(-40deg) scale(.72); opacity: 0; }
+}
+@keyframes clouds-out {
+  0%, 4% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  17.5% { transform: translate3d(-10vw, -15svh, 0) scale(1.18); opacity: 1; }
+  34%, 100% { transform: translate3d(-22vw, -80svh, 0) scale(1.35); opacity: 0; }
+}
+@keyframes moon-through {
+  0%, 9% { transform: translate3d(8vw, 90svh, 0) rotate(18deg) scale(.55); opacity: 0; }
+  19% { opacity: 1; }
+  38.5% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
+  50% { transform: translate3d(-1vw, -3svh, 0) rotate(-2deg) scale(1.02); opacity: 1; }
+  57.5% { transform: translate3d(-2vw, -6svh, 0) rotate(-5deg) scale(1.03); opacity: 1; }
+  74% { transform: translate3d(9vw, -47svh, 0) rotate(-24deg) scale(.9); opacity: 1; }
+  84%, 100% { transform: translate3d(16vw, -110svh, 0) rotate(-40deg) scale(.72); opacity: 0; }
+}
+@keyframes glass-in {
+  0%, 59% { transform: translate3d(8vw, 90svh, 0) rotate(22deg) scale(.55); opacity: 0; }
+  69% { opacity: 1; }
+  88.5% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translate3d(-1vw, -3svh, 0) rotate(-3deg) scale(1.02); opacity: 1; }
+}
+@keyframes waves-in {
+  0%, 62% { transform: translate3d(12vw, 35svh, 0) scale(1.12); opacity: 0; }
+  78% { opacity: 1; }
+  90% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  100% { transform: translate3d(-5vw, -3svh, 0) scale(1.04); opacity: 1; }
+}
+@keyframes type-out {
+  0%, 8% { transform: translate3d(0, 0, 0); opacity: 1; filter: blur(0); }
+  23%, 100% { transform: translate3d(0, calc(-42svh - var(--line) * 9svh), 0); opacity: 0; filter: blur(4px); }
+}
+@keyframes type-through {
+  0%, 19.5% { transform: translate3d(0, calc(45svh + var(--line) * 9svh), 0); opacity: 0; filter: blur(4px); }
+  34%, 58% { transform: translate3d(0, 0, 0); opacity: 1; filter: blur(0); }
+  73%, 100% { transform: translate3d(0, calc(-42svh - var(--line) * 9svh), 0); opacity: 0; filter: blur(4px); }
+}
+@keyframes type-in {
+  0%, 69.5% { transform: translate3d(0, calc(45svh + var(--line) * 9svh), 0); opacity: 0; filter: blur(4px); }
+  84%, 100% { transform: translate3d(0, 0, 0); opacity: 1; filter: blur(0); }
+}
+@keyframes cloud-detail-out {
+  0%, 6% { opacity: 1; transform: translateY(0); visibility: visible; }
+  20%, 100% { opacity: 0; transform: translateY(-20svh); visibility: hidden; }
+}
+@keyframes detail-through {
+  0%, 26% { opacity: 0; transform: translateY(12svh); visibility: hidden; }
+  40%, 56% { opacity: 1; transform: translateY(0); visibility: visible; }
+  70%, 100% { opacity: 0; transform: translateY(-20svh); visibility: hidden; }
+}
+@keyframes ocean-detail-in {
+  0%, 76% { opacity: 0; transform: translateY(12svh); visibility: hidden; }
+  90%, 100% { opacity: 1; transform: translateY(0); visibility: visible; }
+}
+@keyframes caption-out { 0%, 16% { opacity: 1; } 23%, 100% { opacity: 0; } }
+@keyframes caption-through { 0%, 26.5% { opacity: 0; } 33.5%, 66% { opacity: 1; } 73%, 100% { opacity: 0; } }
+@keyframes caption-in { 0%, 76.5% { opacity: 0; } 83.5%, 100% { opacity: 1; } }
+@keyframes story-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* Intrinsic height animation is a progressive enhancement for the services. */
+@supports (interpolate-size: allow-keywords) and selector(details::details-content) {
+  .services { interpolate-size: allow-keywords; }
+  .services details::details-content {
+    height: 0;
+    overflow: clip;
+    opacity: 0;
+    transition: height .45s var(--ease), opacity .3s, content-visibility .45s allow-discrete;
+  }
+  .services details[open]::details-content { height: auto; opacity: 1; }
+}
+
+@media (max-width: 1000px) {
+  .world h1, .world h2 { font-size: clamp(72px, 9vw, 96px); }
+  .orbit-object { width: 75vw; height: 75vw; right: -12vw; top: 12svh; }
+  .moon-object { width: 68vw; height: 68vw; right: -5vw; top: 16svh; }
+  .glass-object { width: 73vw; height: 73vw; right: -8vw; top: 13svh; }
+  .world-description { width: 245px; font-size: 16px; }
+}
+@media (max-width: 680px) {
+  .worlds-scroll { height: 520svh; }
+  .world-copy { top: 24%; }
+  .world h1 { font-size: clamp(48px, 14.8vw, 92px); line-height: 1.03; }
+  .world h2 { font-size: clamp(44px, 13.8vw, 87px); line-height: 1.03; }
+  .orbit-object { width: 115vw; height: 115vw; right: -32vw; top: 12svh; }
+  .moon-object { width: 104vw; height: 104vw; right: -24vw; top: 17svh; }
+  .glass-object { width: 112vw; height: 112vw; right: -30vw; top: 14svh; }
+  .ocean-foreground { width: 190vw; height: 55svh; left: -40vw; bottom: -4svh; }
+  .cloud-foreground { width: 190vw; height: 70svh; right: -68vw; bottom: -14svh; }
+  .world-camera, .world-camera > img { object-position: 62% center; }
+  .world-link { margin-top: 24px; font-size: 11px; gap: 14px; }
+  .world-description { left: var(--gutter); right: auto; bottom: 115px; width: 290px; font-size: 16px; }
+  .world-description > span { font-size: 10px; margin-top: 10px; }
+  .world-caption { bottom: 28px; font-size: 11px; }
+  .world-caption span + span { font-size: 9px; max-width: 135px; }
+  .world-navigation { bottom: 26px; right: 24px; gap: 16px; }
+  .world-pagination { gap: 12px; }
+  .world-pagination button { font-size: 10px; }
+  .pagination-name { display: none; }
+  .next-world { width: 36px; height: 36px; }
+  .next-world .arrow { width: 19px; }
+  .world-scrim { background: linear-gradient(90deg, #211b3980, #211b391a), linear-gradient(0deg, #211b39b3, transparent 65%); }
+  .desert-scrim { background: linear-gradient(90deg, #381a1559, transparent), linear-gradient(0deg, #28120cb3, transparent 65%); }
+  .ocean-scrim { background: linear-gradient(90deg, #241b448c, #241b4426), linear-gradient(0deg, #221d39bf, transparent 65%); }
+}
+@media (max-height: 650px) and (min-width: 681px) {
+  .worlds-stage { min-height: 0; }
+  .world-copy { top: 22%; }
+  .world h1, .world h2 { font-size: clamp(54px, 11svh, 80px); }
+  .world-description { bottom: 115px; }
+}
+@media (max-height: 650px) and (max-width: 680px) {
+  .world-copy { top: 21%; }
+  .world h1, .world h2 { font-size: clamp(38px, 9svh, 58px); }
+  .world-description { bottom: 90px; font-size: 13px; }
+  .world-description > span { margin-top: 4px; }
+  .world-link { margin-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-camera { animation: none; transform: none; }
+  .world-object img { transform: none; transition: none; }
+  .worlds-scroll { height: auto; }
+  .worlds-stage { position: relative; height: auto; overflow: visible; }
+  .world-backdrops { display: none; }
+  .world { position: relative; height: 100svh; min-height: 720px; overflow: clip; }
+  .world-cloud { background: url('/images/cloud-background.webp') 62% center / cover; }
+  .world-desert { background: url('/images/desert-background.webp') 62% center / cover; }
+  .world-ocean { background: url('/images/ocean-background.webp') 62% center / cover; }
+  .world-anchor { top: calc(100% / 3); }
+  .world-anchor-last { top: calc(200% / 3); }
+  .motion-layer { animation: none !important; }
+  .world-progress, .world-navigation { display: none; }
+  .services details::details-content { transition: none; }
+}
+

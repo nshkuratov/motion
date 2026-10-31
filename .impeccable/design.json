@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T18:04:41.555Z",
+  "title": "Design System: MOTION",
+  "extensions": {
+    "colorMeta": {
+      "peach": {
+        "role": "primary",
+        "displayName": "Soft Peach",
+        "canonical": "#f3bbae",
+        "tonalRamp": [
+          "oklch(15% 0.0677 33.37)",
+          "oklch(27% 0.0677 33.37)",
+          "oklch(38% 0.0677 33.37)",
+          "oklch(49% 0.0677 33.37)",
+          "oklch(61% 0.0677 33.37)",
+          "oklch(72% 0.0677 33.37)",
+          "oklch(84% 0.0677 33.37)",
+          "oklch(95% 0.0677 33.37)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Deep Plum Ink",
+        "canonical": "#282331",
+        "tonalRamp": [
+          "oklch(15% 0.0265 300.97)",
+          "oklch(27% 0.0265 300.97)",
+          "oklch(38% 0.0265 300.97)",
+          "oklch(49% 0.0265 300.97)",
+          "oklch(61% 0.0265 300.97)",
+          "oklch(72% 0.0265 300.97)",
+          "oklch(84% 0.0265 300.97)",
+          "oklch(95% 0.0265 300.97)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#fffaf5",
+        "tonalRamp": [
+          "oklch(15% 0.0085 67.73)",
+          "oklch(27% 0.0085 67.73)",
+          "oklch(38% 0.0085 67.73)",
+          "oklch(49% 0.0085 67.73)",
+          "oklch(61% 0.0085 67.73)",
+          "oklch(72% 0.0085 67.73)",
+          "oklch(84% 0.0085 67.73)",
+          "oklch(95% 0.0085 67.73)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Lavender",
+        "canonical": "#c9bfcc",
+        "tonalRamp": [
+          "oklch(15% 0.0210 318.39)",
+          "oklch(27% 0.0210 318.39)",
+          "oklch(38% 0.0210 318.39)",
+          "oklch(49% 0.0210 318.39)",
+          "oklch(61% 0.0210 318.39)",
+          "oklch(72% 0.0210 318.39)",
+          "oklch(84% 0.0210 318.39)",
+          "oklch(95% 0.0210 318.39)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Plum Rule",
+        "canonical": "#5c5263",
+        "tonalRamp": [
+          "oklch(15% 0.0299 311.39)",
+          "oklch(27% 0.0299 311.39)",
+          "oklch(38% 0.0299 311.39)",
+          "oklch(49% 0.0299 311.39)",
+          "oklch(61% 0.0299 311.39)",
+          "oklch(72% 0.0299 311.39)",
+          "oklch(84% 0.0299 311.39)",
+          "oklch(95% 0.0299 311.39)"
+        ]
+      },
+      "project-surface": {
+        "role": "neutral",
+        "displayName": "Raised Plum Field",
+        "canonical": "#342b3b",
+        "tonalRamp": [
+          "oklch(15% 0.0308 310.03)",
+          "oklch(27% 0.0308 310.03)",
+          "oklch(38% 0.0308 310.03)",
+          "oklch(49% 0.0308 310.03)",
+          "oklch(61% 0.0308 310.03)",
+          "oklch(72% 0.0308 310.03)",
+          "oklch(84% 0.0308 310.03)",
+          "oklch(95% 0.0308 310.03)"
+        ]
+      },
+      "field-line": {
+        "role": "neutral",
+        "displayName": "Lavender Field Stroke",
+        "canonical": "#827189",
+        "tonalRamp": [
+          "oklch(15% 0.0414 316.08)",
+          "oklch(27% 0.0414 316.08)",
+          "oklch(38% 0.0414 316.08)",
+          "oklch(49% 0.0414 316.08)",
+          "oklch(61% 0.0414 316.08)",
+          "oklch(72% 0.0414 316.08)",
+          "oklch(84% 0.0414 316.08)",
+          "oklch(95% 0.0414 316.08)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "World Display",
+        "purpose": "Large world headlines."
+      },
+      "headline": {
+        "displayName": "Studio Headline",
+        "purpose": "Studio introduction."
+      },
+      "title": {
+        "displayName": "Disclosure Title",
+        "purpose": "Service disclosure rows."
+      },
+      "body": {
+        "displayName": "Studio Body",
+        "purpose": "Supporting prose, usually constrained to 48ch."
+      },
+      "label": {
+        "displayName": "Interface Label",
+        "purpose": "Navigation and form labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "mobile-nav",
+        "value": "0 18px 24px #1b152530",
+        "purpose": "Separation beneath the expanded mobile navigation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Shared interface easing."
+      },
+      {
+        "name": "pill-transition",
+        "value": "background .25s, color .25s, transform .25s",
+        "purpose": "Pill state changes."
+      },
+      {
+        "name": "story-clock",
+        "value": "linear",
+        "purpose": "Scroll progress drives separate background, object, foreground, and text tracks."
+      },
+      {
+        "name": "story-range",
+        "value": "580svh / 520svh at max-width 680px",
+        "purpose": "Sticky world sequence scroll distance; reduced motion uses normal stacked flow."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; transition: none; scroll-behavior: auto",
+        "purpose": "No animated scene transition; worlds remain visible sequentially."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow-form",
+        "value": "370px"
+      },
+      {
+        "name": "mobile",
+        "value": "680px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1000px"
+      },
+      {
+        "name": "wide",
+        "value": "1500px"
+      },
+      {
+        "name": "short-viewport-height",
+        "value": "650px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid local brief download action.",
+      "html": "<button class=\"ds-primary\">Save my brief <svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h15M12 5l7 7-7 7\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:22px;padding:13px 23px;border-radius:99px;font:13px Manrope,sans-serif;cursor:pointer;transition:background .25s,color .25s,transform .25s;background:var(--paper,#fffaf5);color:var(--ink,#282331);border:1px solid var(--paper,#fffaf5)}.ds-primary:hover{background:var(--peach,#f3bbae);border-color:var(--peach,#f3bbae);transform:translateY(-2px)}.ds-primary:focus-visible{outline:2px solid var(--peach,#f3bbae);outline-offset:7px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Quiet header action over the visual world.",
+      "html": "<a class=\"ds-outline\" href=\"#project\">Let’s talk <svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h15M12 5l7 7-7 7\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-outline{display:inline-flex;align-items:center;justify-content:center;gap:22px;padding:13px 23px;border-radius:99px;font:13px Manrope,sans-serif;cursor:pointer;transition:background .25s,color .25s,transform .25s;background:transparent;color:var(--paper,#fffaf5);border:1px solid #fffaf580;text-decoration:none}.ds-outline:hover{background:var(--paper,#fffaf5);color:var(--ink,#282331);transform:translateY(-2px)}.ds-outline:focus-visible{outline:2px solid var(--peach,#f3bbae);outline-offset:7px}@media(prefers-reduced-motion:reduce){.ds-outline{transition:none}}"
+    },
+    {
+      "name": "Circular Direction",
+      "kind": "button",
+      "refersTo": "button-circle",
+      "description": "Next-scene control paired with a short label or numbered navigation.",
+      "html": "<button class=\"ds-circle\" aria-label=\"Next scene\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 12h15M12 5l7 7-7 7\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-circle{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #fffaf56e;border-radius:50%;background:transparent;color:var(--paper,#fffaf5);cursor:pointer;transition:background .25s,transform .4s var(--ease,cubic-bezier(.16,1,.3,1))}.ds-circle svg{transform:rotate(90deg)}.ds-circle:hover{background:#fffaf525;transform:translateY(3px)}.ds-circle:focus-visible{outline:2px solid var(--peach,#f3bbae);outline-offset:7px}@media(prefers-reduced-motion:reduce){.ds-circle{transition:none}}"
+    },
+    {
+      "name": "Service Choice",
+      "kind": "chip",
+      "refersTo": "chip-selected",
+      "description": "Native radio chips show the chosen brief category.",
+      "html": "<fieldset class=\"ds-choices\"><legend>What are you thinking?</legend><label class=\"ds-chip\"><input type=\"radio\" name=\"ds-service\" checked><span>Brand identity</span></label><label class=\"ds-chip\"><input type=\"radio\" name=\"ds-service\"><span>Website</span></label></fieldset>",
+      "css": ".ds-choices{border:0;padding:0;margin:0;color:var(--paper,#fffaf5);font:14px Manrope,sans-serif}.ds-choices legend{margin-bottom:20px}.ds-chip{display:inline-flex;position:relative;border:1px solid #827189;border-radius:99px;cursor:pointer;padding:10px 15px;font-size:11px;margin-right:9px;transition:background .2s,color .2s}.ds-chip input{position:absolute;width:1px;height:1px;opacity:0}.ds-chip:has(:checked){color:var(--ink,#282331);background:var(--peach,#f3bbae);border-color:var(--peach,#f3bbae)}.ds-chip:has(:focus-visible){outline:2px solid var(--peach,#f3bbae);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-chip{transition:none}}"
+    },
+    {
+      "name": "Underline Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A labeled native field for the local project brief.",
+      "html": "<label class=\"ds-field\">Your name<input autocomplete=\"name\" placeholder=\"Alex Taylor\" required maxlength=\"100\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:12px;color:var(--paper,#fffaf5);font:12px Manrope,sans-serif;max-width:360px}.ds-field input{background:transparent;color:var(--paper,#fffaf5);border:0;border-bottom:1px solid #827189;border-radius:0;padding:11px 0 14px;width:100%;font:14px Manrope,sans-serif;caret-color:var(--peach,#f3bbae)}.ds-field input::placeholder{color:#bcadbf;opacity:1}.ds-field input:focus-visible{outline:2px solid var(--peach,#f3bbae);outline-offset:7px;outline-offset:4px}"
+    },
+    {
+      "name": "Desktop Navigation",
+      "kind": "nav",
+      "description": "Small editorial links with an active underline.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#worlds\" aria-current=\"page\">The worlds</a><a href=\"#studio\">The studio</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:32px;color:var(--paper,#fffaf5);font:12px Manrope,sans-serif}.ds-nav a{position:relative;padding:12px 0;color:inherit;text-decoration:none}.ds-nav a::after{content:\"\";position:absolute;bottom:4px;left:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}.ds-nav a:hover::after,.ds-nav a[aria-current]::after{transform:scaleX(1)}.ds-nav a:focus-visible{outline:2px solid var(--peach,#f3bbae);outline-offset:7px}@media(prefers-reduced-motion:reduce){.ds-nav a::after{transition:none}}"
+    },
+    {
+      "name": "Service Disclosure",
+      "kind": "custom",
+      "description": "Native openable service row with thin rules and a changing plus sign.",
+      "html": "<details class=\"ds-service\" open><summary>Brand identities<span class=\"ds-plus\" aria-hidden=\"true\"></span></summary><p>A clear point of view, made visible. Strategy, visual identity, and a design language with room to grow.</p></details>",
+      "css": ".ds-service{color:var(--paper,#fffaf5);border-top:1px solid var(--line,#5c5263);border-bottom:1px solid var(--line,#5c5263);padding:0 0 7px;font-family:Manrope,sans-serif}.ds-service summary{list-style:none;cursor:pointer;padding:25px 0;display:flex;justify-content:space-between;align-items:center;font-size:clamp(24px,3vw,40px);letter-spacing:-.03em}.ds-service summary::-webkit-details-marker{display:none}.ds-service summary:hover{color:var(--peach,#f3bbae)}.ds-service summary:focus-visible{outline:2px solid var(--peach,#f3bbae);outline-offset:7px}.ds-plus{position:relative;width:24px;height:24px;flex:none}.ds-plus::before,.ds-plus::after{content:\"\";position:absolute;top:11px;left:2px;right:2px;height:1px;background:currentColor;transition:transform .3s}.ds-plus::after{transform:rotate(90deg)}.ds-service[open] .ds-plus::after{transform:rotate(0)}.ds-service p{max-width:60ch;line-height:1.8;font-size:14px;color:var(--muted,#c9bfcc);padding-bottom:27px;margin:0}@media(prefers-reduced-motion:reduce){.ds-plus::after{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Impossible worlds",
+    "overview": "An immersive, cinematic visual world pairs oversized warm lettering with surreal imagery and quiet interface controls. Depth comes from independently moving background, object, foreground, and text layers. Content surfaces use spacious plum fields and simple ruled rows.\n\nThis document captures the implemented local React + Vite concept. MOTION is a provisional working identity; the North Star and descriptive color names summarize the existing direction, not permanent user brand preferences. The user-pinned reference is [wearebrand.io](https://wearebrand.io/), with English content and layered scroll transitions. Page composition and scene-specific imagery remain in the surface brief.",
+    "keyCharacteristics": [
+      "Full-bleed imagery with independently moving layers.",
+      "Heavy Manrope display text and small, restrained navigation.",
+      "Warm white and peach against deep plum interface surfaces.",
+      "Outline pills, circular arrows, and thin ruled rows.",
+      "Stepped scene navigation with an explicit reduced-motion presentation."
+    ],
+    "rules": [],
+    "dos": [
+      "**Do** align content and navigation to the shared gutter.",
+      "**Do** preserve distinct scene layers when extending scroll transitions.",
+      "**Do** keep readable scrims between image detail and foreground text.",
+      "**Do** retain visible keyboard focus, native controls, and the reduced-motion layout.",
+      "**Do** identify authored visual projects as concepts until real work is supplied."
+    ],
+    "donts": [
+      "**Don't** turn the provisional MOTION identity into an asserted permanent brand commitment.",
+      "**Don't** intercept scrolling outside the scene sequence or when reduced motion is enabled.",
+      "**Don't** leave visually hidden scene controls keyboard-focusable.",
+      "**Don't** imply the local brief download sends a message."
+    ]
+  }
+}
+
+

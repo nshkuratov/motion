@@ -1,0 +1,17 @@
+# Scroll choreography
+
+The user requested the layered scroll transitions of wearebrand.io, rather than separate full-screen images.
+
+- Focal moment: a pinned 580svh story (520svh on mobile). The chrome orbit rises out of clouds while a warm moon rises from below. The second transition repeats the same rhythm as the moon yields to a glass sculpture above a lavender sea, with a separate foreground wave. Each transition occupies half the scroll timeline; skies dissolve and staggered type travels independently.
+- Continuity: wheel, swipe, keyboard and scene controls share a stepped navigation controller. Every transition lasts 1800 ms, with no post-transition pause. Extra events are discarded rather than queued; trackpad momentum requires a 180 ms quiet interval before a new gesture. The controller animates the same scroll range in both directions. The stage releases into the studio at the end.
+- Feedback: scene navigation updates at the 25% and 75% transition midpoints; the progress track follows scrolling.
+- Ambient camera: nested background images run independent 18/22/20-second alternating paths. Clouds slowly pull back and drift right, the desert pushes in and drifts left, and the ocean pushes in and drifts right. Ease-in-out reversals avoid a loop reset. A minimum 6% overscan covers all horizontal and vertical movement. Scroll transforms and fades stay on the outer wrappers, so camera motion continues through slide changes. Animation pauses outside the story, with the menu open, offscreen, or in a hidden tab; reduced motion removes it.
+- Cursor response: a fine mouse pointer moves the ring up to 16 × 11 px, the planet 10 × 8 px, and the glass sculpture 18 × 12 px, with rotation capped at 0.8°, 0.25°, and 1°. A 700 ms ease-out smooths the response. Inner images carry this transform independently of their scroll-animated parents. Pointer writes are batched to one animation frame; leaving the window, opening the menu, or leaving the story resets the offset. Touch and reduced-motion users receive no cursor effect.
+- Budget: transform/opacity on separate image layers. Optional PixiJS heat/water shaders use one deferred WebGL renderer, capped at 800,000 pixels and 30 fps, paused during transitions and outside eligible visible scenes. See [performance policy](pixi-effects.md). Wheel and touch interception is scoped to scene navigation as explicitly requested; normal scrolling resumes below the story. Background blur is bounded. CSS view timelines animate in supporting browsers; paused keyframes driven by a requestAnimationFrame fallback reuse the identical choreography elsewhere.
+- Accessibility: reduced motion returns the three worlds to normal document flow; inactive animated copy is inert so invisible links cannot take focus. Touch, keyboard and anchor navigation use the same controller; reduced motion retains native scrolling.
+- Modern CSS: animation-timeline and animation-range drive the story; typed attr supplies per-line depth with explicit variable fallbacks; interpolate-size enables intrinsic accordion height transitions. calc-size is unnecessary unless arithmetic on an intrinsic dimension is needed.
+
+Sources: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline ; https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size ; https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/attr ; https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/calc-size
+
+
+
